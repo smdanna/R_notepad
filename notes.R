@@ -14,7 +14,8 @@ w2ktn$diab <- NULL
 
 # rename columns
 View(ghq_elsa)
-ghq_elsa <- setNames(ghq_elsa, c("ghqconc", "ghqsleep", "ghquse", "ghqdecis", "ghqstrai", "ghqover", "ghqenjoy", "ghqface", "ghqunhap", "ghqconfi", "ghqworth", "ghqha"))
+ghq_elsa <- setNames(ghq_elsa, c("ghqconc", "ghqsleep", "ghquse", "ghqdecis", "ghqstrai", "ghqover",
+                                 "ghqenjoy", "ghqface", "ghqunhap", "ghqconfi", "ghqworth", "ghqha"))
 
 # export to .txt file
 write.table(ghq_elsa, "c:/[path]/data.txt", sep="\t") 
