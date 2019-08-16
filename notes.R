@@ -1,3 +1,7 @@
+# turn a section of text into a comment
+# on Mac: Shift + Command + C
+# [I think on on Windows it's Control + Shift + C]
+
 # count of non-NAs in dataframe "cog"
 colSums(!is.na(cog))
 
