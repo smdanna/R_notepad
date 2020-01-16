@@ -23,3 +23,7 @@ ghq_elsa <- setNames(ghq_elsa, c("ghqconc", "ghqsleep", "ghquse", "ghqdecis", "g
 
 # export to .txt file
 write.table(ghq_elsa, "c:/[path]/data.txt", sep="\t") 
+
+# find and replace a variable name everywhere in a document (courtesy of https://github.com/mckillshark/!)
+# on Windows: Control + Alt + Shift + M
+# this message brought to you by: good things come to those who Google with perseverance
