@@ -64,3 +64,16 @@ chicago %>%
   mutate(month) %>% 
   group_by(month) %>% 
   summarise(pm25=mean(pm25))  # create summary of means of pm25 in each month
+
+
+
+
+#### own notes on dplyr ####
+
+# drop column from dataframe
+ORs <- ORs %>%
+  mutate(
+    X = NULL,
+    X.1 = NULL,
+    X.2 = NULL
+    )
