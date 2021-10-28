@@ -28,6 +28,8 @@ write.table(ghq_elsa, "c:/[path]/data.txt", sep="\t")
 # on Windows: Control + Alt + Shift + M
 # this message brought to you by: good things come to those who Google with perseverance
 
+# order columns alphabetically
+data23b <- data23b[,order(colnames(data23b))]
 
 
 
