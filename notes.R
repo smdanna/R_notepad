@@ -79,3 +79,8 @@ ORs <- ORs %>%
     X.1 = NULL,
     X.2 = NULL
     )
+
+
+
+#### Rmarkdown, text in colour ####
+<span style="color: red;">Should I restrict population to people with a cervix?</span>
