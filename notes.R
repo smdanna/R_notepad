@@ -84,3 +84,118 @@ ORs <- ORs %>%
 
 #### Rmarkdown, text in colour ####
 <span style="color: red;">Should I restrict population to people with a cervix?</span>
+
+
+#### Moffitt tutorial on data manipulation
+
+library(tidyverse)
+
+#### Joining ----
+clinical <- read_csv("data.txt")
+
+
+clinical <- read.csv("~/[path]/clinical.txt")
+
+gene_exp <- read.csv("~/[path]/gene_exp.txt")
+
+clinical <- as_tibble(clinical)
+gene_exp <- as_tibble(gene_exp)
+
+clinical_kirc <- clinical %>%
+  filter(acronym == "KIRC")
+
+View(clinical_kirc)
+
+# matches gene_exp columns and data to all rows and columns from clinical_kirc
+left_data <- clinical_kirc %>%
+  left_join(gene_exp)
+
+# matches all gene-exp data to clinical_kirc columns and rows
+# to clinical_kirc, matches all of gene-exp, and matches gene_exp columns and  from clinical_kirc columns 
+right_data <- clinical_kirc %>%
+  right_join(gene_exp)
+
+View(right_data)
+
+inner_data <- clinical_kirc %>%
+  inner_join(gene_exp %>%
+               select(bcr_patient_barcode, AAMP_exp))
+
+inner_data <- clinical_kirc %>%
+  inner_join(gene_exp %>%
+               select(bcr_patient_barcode, AAMP_exp)) %>%
+  select(bcr_patient_barcode, AAMP_exp, height)
+
+colnames(gene_exp)
+
+full_data <- clinical_kirc %>%
+  full_join(gene_exp)
+
+# returns only cols from clinic_kirc and only rows that are in gene_exp but no gene_exp data
+semi_data <- clinical_kirc %>% # within your clinical dataset, only the IDs in this other data (gene_exp)
+  semi_join(gene_exp)
+
+# returns clincial_kirc columns with the patient rows that are not in gene-exp (O in this case)
+anti_data <- clinical_kirc %>%
+  anti_join(gene_exp)
+
+#### Transposing ----
+
+pivot_longer(tibble, cols = "vars")
+
+pivot_wider()
+
+gene_long <- gene_exp %>%
+  pivot_longer(cols = contains("_exp"), names_to = "gene", values_to = "expression")
+
+# you can specify multiple id_cols to match
+gene_wide <- gene_long %>%
+  pivot_wider(id_cols = "bcr_patient_barcode", names_from = gene, values_from = expression)
+
+twogenes_wide <- gene_long %>%
+  filter(gene %in% c("DNAH12_exp", "BUB1_exp")) %>%
+  pivot_wider(id_cols = "bcr_patient_barcode", names_from = gene, values_from = expression)
+
+#   filter(gene %in% c("DNAH12_exp", "BUB1_exp")) %>%  --- this is how you do OR function for strings
+
+#### Missing values ----
+
+filter(data, is.na(variable))
+filter(full_data, is.na(acronym))
+
+summary(as.factor(full_data$acronym))
+
+# drop_na(variable2)  -- removes rows with NAs for that column
+# fill(variable2) - fills in missing values with the previous value (up or down)
+# replace_na(list(variable2 = "replacement value")) - replaces NAs with a specified value
+
+table(clinical$race)
+
+clinical %>%
+  drop_na(race)
+
+clinical %>%
+  drop_na(race) %>%
+  fill(radiation_therapy) # fill radiation NAs with previous value -- not sure why would use
+
+clinical %>%
+  replace_na(list(race = "unknown",
+                  tobacco_smoking_history = "most likely no"))
+
+#### Basics of working with strings ----
+
+# separate(), extract(), and unite()
+
+# separate(tibble_name, var1, into = c("new_var1", "new_var2"), sep = "-")
+# extract(tibble_name, var1, regex="[[:alnum:]]+)")
+#    extract() uses regex which is outside the scope of this course
+# unite(tibble_name, "combined_var_name", var1, var2, sep = ":")
+
+clinical %>%
+  unite("race_ethnicity", race, ethnicity, sep = ":") %>%
+  select(bcr_patient_barcode,race_ethnicity)
+
+clinical %>%
+  unite("race_ethnicity", race, ethnicity, sep = ":") %>%
+  separate(race_ethnicity, into = c("race", "ethnicity"), sep = ":")
+
