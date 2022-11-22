@@ -199,3 +199,5 @@ clinical %>%
   unite("race_ethnicity", race, ethnicity, sep = ":") %>%
   separate(race_ethnicity, into = c("race", "ethnicity"), sep = ":")
 
+#### how to connect RStudio project to GitHub repository ####
+# https://www.youtube.com/watch?v=bUoN85QvC10
