@@ -201,3 +201,47 @@ clinical %>%
 
 #### how to connect RStudio project to GitHub repository ####
 # https://www.youtube.com/watch?v=bUoN85QvC10
+
+#### use gsub to edit column names ####
+# Clear workspace
+rm(list=ls())
+
+library(readxl)
+
+# Import data
+df <- read_excel("Downloads/df.xlsx")
+View(df) 
+
+# Pop out column names of the dataframe to a vector
+df.cols <- colnames(df)
+df.cols
+
+# Substitute pattern with nothing, save in df.cols
+# ^ = beginning of string
+# . = any character
+# * = as many times as it appears, including zero
+# \\( = open parenthesis
+df.cols <- gsub('^.*\\(', '', df.cols)
+df.cols
+
+# Substitute pattern with nothing, save in df.cols
+# \\) = close parenthesis
+df.cols <- gsub('\\)', '', df.cols)
+df.cols
+
+# Replace column names of dataframe with freshly edited vector
+colnames(df) <- df.cols
+
+#Check your work
+View(df)
+
+# Info on gsub; it's from base R!
+?gsub
+
+# References
+# gsub explanation
+# https://stackoverflow.com/questions/9704213/remove-part-of-a-string
+# Stringr cheatsheets
+# https://github.com/rstudio/cheatsheets/blob/main/strings.pdf
+
+
