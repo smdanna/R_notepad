@@ -244,4 +244,6 @@ View(df)
 # Stringr cheatsheets
 # https://github.com/rstudio/cheatsheets/blob/main/strings.pdf
 
-
+# how to specify column types when reading in data from Excel
+# https://readxl.tidyverse.org/articles/cell-and-column-types.html
+read_excel("yo.xlsx", col_types = c("date", "skip", "guess", "numeric"))
