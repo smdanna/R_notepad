@@ -247,3 +247,6 @@ View(df)
 # how to specify column types when reading in data from Excel
 # https://readxl.tidyverse.org/articles/cell-and-column-types.html
 read_excel("yo.xlsx", col_types = c("date", "skip", "guess", "numeric"))
+
+# date formats
+# https://www.statmethods.net/input/dates.html
