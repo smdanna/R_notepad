@@ -250,3 +250,6 @@ read_excel("yo.xlsx", col_types = c("date", "skip", "guess", "numeric"))
 
 # date formats
 # https://www.statmethods.net/input/dates.html
+
+# viridis palette generator
+# https://waldyrious.net/viridis-palette-generator/
